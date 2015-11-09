@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <meta charset="UTF-8">
+      <meta name="description" content="Gift Planning App">
+      <meta name="keywords" content="gift, holiday, birthday, planning, present">
+      <meta name="author" content="Christine Moses">
+      <title>Gift Planner</title>
+      <link rel="stylesheet" href="styles/main.css">
+    </head>
+    <body>
+      <!--<<div id="background"></div>-->
+      <h1>Gift Planner</h1>
+      <h2 class="alert">Please Create an Account To Start Planning</h2>
+      <!--<h2 id='logged-in'>Please Log In</h2>-->
+
+      <div class="inputs">
+        <form id="register">
+          <input name="email" type="text" placeholder="email">
+          <input name="password" type="password" placeholder="password">
+          <input name="password_confirmation" type="password" placeholder="password confirmation">
+          <input name="register" type="submit" value="Register">
+        </form>
+        <form id="login">
+          <input name="email" type="text" placeholder="email">
+          <input name="password" type="password" placeholder="password">
+          <input name="login" type="submit" value="Login">
+        </form>
+        <br>
+        <form id="search-holidays">
+          <input name="name" type="text" placeholder="Holiday name">
+          <input name="search-holidays" type="submit" value="Search Saved Holidays">
+          <input class="token" name="token" type="hidden">
+        </form>
+        <form id="search-recipients">
+          <input name="name" type="text" placeholder="Recipient name">
+          <input name="search-recipients" type="submit" value="Search Saved Recipients">
+          <input class="token" name="token" type="hidden">
+        </form>
+        <br>
+        <form id="create-holiday">
+          <input name="name" type="text" placeholder="New holiday name">
+          <input name="create-holiday" type="submit" value="Create a New Holiday">
+          <input class="token" name="token" type="hidden">
+        </form>
+        <form id="create-recipient">
+          <input name="name" type="text" placeholder="New recipient name">
+          <input name="create-recipient" type="submit" value="Create a New Recipient">
+          <input class="token" name="token" type="hidden">
+        </form>
+
+        <br>
+        <label for="result">Result</label>
+        <textarea id="result"></textarea>
+      </div>
+
+        <!--<p><a target="_blank" href="http://porter-waterlines-15870.bitballoon.com/">Learn more about the creator of this tool</a></p>-->
+      </div>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+      <script type="text/javascript" src="http://ttt.wdibos.com/js/resource-watcher-0.1.0.js" defer charset="utf-8"></script>
+      <!--<script type="text/javascript" src="assets/api-files/index.js"></script>
+      <script type="text/javascript" src="assets/scripts/main.js"></script>-->
+    </body>
+  </html>
