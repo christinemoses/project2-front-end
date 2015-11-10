@@ -1,6 +1,6 @@
 body {
   text-align: center;
-  font-family: verdana;
+  font-family: 'Khula', sans-serif;
 }
 
 #background {
@@ -12,7 +12,8 @@ body {
   background-image: url(./images/boxes_grayscale.jpg);
   background-repeat: repeat-y;
   background-size: 100%;
-  opacity: 0.6;
+  opacity: 0.2;
+  z-index: -1;
 }
 
 #inputs {
