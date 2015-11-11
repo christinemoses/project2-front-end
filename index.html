@@ -12,9 +12,8 @@
     <body>
       <div id="background"></div>
       <h1>Gift Planner</h1>
-      <h2 class="alert">Please Create an Account To Start Planning</h2>
-      <!--<h2 id='logged-in'>Please Log In</h2>-->
-
+      <h2 id='logged-in'>Please Log In To Start Planning</h2>
+      <!--<h2 class="alert">Please Create an Account To Start Planning</h2>-->
       <div class="inputs">
         <form id="register">
           <input name="email" type="text" placeholder="email">
@@ -23,31 +22,46 @@
           <input name="register" type="submit" value="Register">
         </form>
         <form id="login">
-          <input name="email" type="text" placeholder="email">
-          <input name="password" type="password" placeholder="password">
+          <input name="email" type="text" value="bbb@ccc.com">
+          <input name="password" type="password" value="12345">
           <input name="login" type="submit" value="Login">
         </form>
-        <br>
-        <form id="search-holidays">
-          <input name="name" type="text" placeholder="Holiday name">
-          <input name="search-holidays" type="submit" value="Search Saved Holidays">
-          <input class="token" name="token" type="hidden">
-        </form>
-        <form id="search-recipients">
-          <input name="name" type="text" placeholder="Recipient name">
-          <input name="search-recipients" type="submit" value="Search Saved Recipients">
-          <input class="token" name="token" type="hidden">
+        <form id="logout">
+          <input name="logout" type="submit" value="Log Out">
         </form>
         <br>
+        <form id="list-holidays">
+          <input name="list-holidays" type="submit" value="View Saved Holidays">
+        </form>
+        <ul class="holiday-listing">
+          <lh>Your saved holidays:</lh>
+          <!--<li><a href="https://www.google.com">Christmas</a></li>
+          <li><a href="https://www.google.com">Gabe's Birthday</a></li>
+          <li><a href="https://www.google.com">Valentine's Day</a></li>-->
+          </ul>
         <form id="create-holiday">
-          <input name="name" type="text" placeholder="New holiday name">
-          <input name="create-holiday" type="submit" value="Create a New Holiday">
-          <input class="token" name="token" type="hidden">
+          <input id="holiday-name" name="name" type="text" placeholder="New holiday name">
+          <input name="create-holiday" type="submit" value="Create a new Holiday">
         </form>
+        <ul class="recipient-listing">
+          <lh>Christmas gift recipients:</lh>
+          <!--<li><a href="https://www.google.com">Hao</a></li>
+          <li><a href="https://www.google.com">Gabe</a></li>
+          <li><a href="https://www.google.com">Zoe</a></li>-->
+          </ul>
         <form id="create-recipient">
-          <input name="name" type="text" placeholder="New recipient name">
-          <input name="create-recipient" type="submit" value="Create a New Recipient">
-          <input class="token" name="token" type="hidden">
+          <input id="recipient-name" name="name" type="text" placeholder="New recipient name">
+          <input name="create-recipient" type="submit" value="Add a new Recipient">
+        </form>
+        <ul class="gift-listing">
+          <lh>Gift ideas for Gabe:</lh>
+          <!--<li><a href="https://www.google.com">Legos</a></li>
+          <li><a href="https://www.google.com">Play-doh</a></li>
+          <li><a href="https://www.google.com">Trucks</a></li>-->
+          </ul>
+        <form id="create-gift-idea">
+          <input id="gift-name" name="name" type="text" placeholder="New gift idea name">
+          <input name="create-gift-idea" type="submit" value="Add a new gift idea">
         </form>
 
         <br>

@@ -1,8 +1,19 @@
 'use strict';
 var api = {
   svr: 'http://localhost:3000',
+  token: null,
 
   ajax: function(config, cb) {
+    if(this.token !== null){
+      var headers = {
+        headers: {
+          Authorization: 'Token token=' + this.token
+        }
+      };
+
+      config = $.extend({}, config, headers);
+    }
+
     $.ajax(config).done(function(data, textStatus, jqxhr) {
       cb(null, data);
     }).fail(function(jqxhr, status, error) {
@@ -29,8 +40,65 @@ var api = {
       dataType: 'json'
     }, callback);
   },
-};
 
+  //Authenticated api actions
+
+  createHoliday: function (callback, name) {
+    this.ajax({
+      method: 'POST',
+      url: this.svr + '/holidays',
+      contentType: 'application/json; charset=utf-8',
+      data: JSON.stringify({"holiday": {"name":name}}),
+      dataType: 'json'
+    }, callback);
+  },
+
+  listHolidays: function (callback) {
+    this.ajax({
+      method: 'GET',
+      url: this.svr + '/holidays',
+      dataType: 'json'
+    }, callback);
+  },
+
+  createRecipient: function (callback) {
+    this.ajax({
+      method: 'POST',
+      url: this.svr + '/holidays',
+      contentType: 'application/json; charset=utf-8',
+      data: JSON.stringify({}),
+      dataType: 'json'
+    }, callback);
+  },
+
+  listRecipients: function (callback, holidayId) {
+    this.ajax({
+      method: 'GET',
+      url: this.svr + '/holidays/' + holidayId + '/recipients',
+      dataType: 'json'
+    }, callback);
+  },
+
+  createGiftIdea: function (callback) {
+    this.ajax({
+      method: 'POST',
+      url: this.svr + '/holidays/recipients',
+      contentType: 'application/json; charset=utf-8',
+      data: JSON.stringify({}),
+      dataType: 'json'
+    }, callback);
+  },
+
+  listGiftIdeas: function (callback) {
+    this.ajax({
+      method: 'GET',
+      url: this.svr + '/holidays/recipients',
+      dataType: 'json'
+    }, callback);
+  },
+
+
+};
 
 
 $(function() {
@@ -49,6 +117,14 @@ $(function() {
     var wrapper = {};
     wrapper[root] = formData;
     return wrapper;
+  };
+
+  var holidayListCallback = function(error, data) {
+    $(".holiday-listing").empty();
+    var arr = data.holidays;
+    arr.forEach(function(holiday, _index, _arr){
+      $(".holiday-listing").append("<li><a class='hol-li' href='#'>"+ holiday.name + "</a></li>");
+    });
   };
 
   var callback = function callback(error, data) { // show me error or show me response - gets returns from the request
@@ -72,17 +148,50 @@ $(function() {
       callback(error);
       return;
     }
-    //
-    $('#logged-in').html("User " + loginData.user.email + " is Logged IN");
 
+    $('#logged-in').html("User " + loginData.user.email + " is Logged IN");
     callback(null, loginData);
-    $('.token').val(loginData.user.token); // stores token data on the page
+    api.token = loginData.user.token; // stores token data on the page
   };
 
   $('#login').on('submit', function(e) {
     var credentials = wrap('credentials', form2object(this));
-
     e.preventDefault();
     api.login(credentials, loginCallback);
   });
+
+  $('#list-holidays').on('submit', function(e) {
+    e.preventDefault();
+    api.listHolidays(holidayListCallback);
+  });
+
+  // this is event delegation method for event handling
+  // tells the page to keep listening for this event
+  // even if the element is created later on
+  $(document).on('click','.hol-li', function(e){
+    e.preventDefault();
+    api.
+  });
+
+  $('#create-holiday').on('submit', function(e) {
+    e.preventDefault();
+    var name = $('#holiday-name').val();
+    api.createHoliday(function(){$("#list-holidays").trigger("submit")}, name);
+  });
+
+  $('#create-recipient').on('submit', function(e) {
+    e.preventDefault();
+    var name = $('#recipient-name').val();
+    api.createRecipient(callback, name);
+  });
+
+  $('#create-gift-idea').on('submit', function(e) {
+    e.preventDefault();
+    var name = $('#gift-name').val();
+    api.createGiftIdea(callback, description);
+  });
+
+  $('#logout').on('submit', function(e) {
+  var credentials = wrap('credentials', form2object(this));
+});
 });
