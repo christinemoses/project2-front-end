@@ -123,7 +123,9 @@ $(function() {
     $(".holiday-listing").empty();
     var arr = data.holidays;
     arr.forEach(function(holiday, _index, _arr){
-      $(".holiday-listing").append("<li><a class='hol-li' href='#'>"+ holiday.name + "</a></li>");
+      $(".holiday-listing").append("<li><a class='hol-li' data-id='" + holiday.id +  "' href='#'>"+ holiday.name + "</a></li>");
+      // html data-* attribute
+      // $('a').data('id') == 1
     });
   };
 
@@ -170,8 +172,12 @@ $(function() {
   // even if the element is created later on
   $(document).on('click','.hol-li', function(e){
     e.preventDefault();
-    api.
+    var holidayId = $(this).data('id');
+    var holidayName = $(this).text();
+    $('#holiday-heading').html(holidayName + " recipients:");
+    api.listRecipients(callback, holidayId);
   });
+
 
   $('#create-holiday').on('submit', function(e) {
     e.preventDefault();
