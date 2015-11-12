@@ -61,12 +61,12 @@ var api = {
     }, callback);
   },
 
-  createRecipient: function (callback) {
+  createRecipient: function (callback, holidayId, name) {
     this.ajax({
       method: 'POST',
-      url: this.svr + '/holidays',
+      url: this.svr + '/holidays/' + holidayId + '/recipients',
       contentType: 'application/json; charset=utf-8',
-      data: JSON.stringify({}),
+      data: JSON.stringify({"recipient": {"name":name}}),
       dataType: 'json'
     }, callback);
   },
@@ -102,7 +102,7 @@ var api = {
 
 
 $(function() {
-  var form2object = function(form) { // extracts input data from aform and adds it to an object
+  var form2object = function(form) { // extracts input data from a form and adds it to an object
     var data = {};
     $(form).children().each(function(index, element) {
       var type = $(this).attr('type');
@@ -123,11 +123,22 @@ $(function() {
     $(".holiday-listing").empty();
     var arr = data.holidays;
     arr.forEach(function(holiday, _index, _arr){
-      $(".holiday-listing").append("<li><a class='hol-li' data-id='" + holiday.id +  "' href='#'>"+ holiday.name + "</a></li>");
+      $(".holiday-listing").append("<li><a class='holiday-li' data-id='" + holiday.id +  "' href='#'>"+ holiday.name + "</a></li>");
       // html data-* attribute
       // $('a').data('id') == 1
     });
   };
+
+  var recipientListCallback = function(error, data) {
+    $(".recipient-listing").empty();
+    var arr = data.recipients;
+    arr.forEach(function(recipient, _index, _arr){
+      $(".recipient-listing").append("<li><a class='recipient-li' data-id='" + recipient.id +  "' href='#'>"+ recipient.name + "</a></li>");
+      // html data-* attribute
+      // $('a').data('id') == 1
+    });
+  };
+
 
   var callback = function callback(error, data) { // show me error or show me response - gets returns from the request
     if (error) {
@@ -151,7 +162,7 @@ $(function() {
       return;
     }
 
-    $('#logged-in').html("User " + loginData.user.email + " is Logged IN");
+    $('#logged-in').html("Logged in as " + loginData.user.email);
     callback(null, loginData);
     api.token = loginData.user.token; // stores token data on the page
   };
@@ -170,14 +181,14 @@ $(function() {
   // this is event delegation method for event handling
   // tells the page to keep listening for this event
   // even if the element is created later on
-  $(document).on('click','.hol-li', function(e){
+  $(document).on('click','.holiday-li', function(e){
     e.preventDefault();
     var holidayId = $(this).data('id');
     var holidayName = $(this).text();
+    $("#recipient-holiday-id").val(holidayId);
     $('#holiday-heading').html(holidayName + " recipients:");
-    api.listRecipients(callback, holidayId);
+    api.listRecipients(recipientListCallback, holidayId);
   });
-
 
   $('#create-holiday').on('submit', function(e) {
     e.preventDefault();
@@ -188,8 +199,19 @@ $(function() {
   $('#create-recipient').on('submit', function(e) {
     e.preventDefault();
     var name = $('#recipient-name').val();
-    api.createRecipient(callback, name);
+    var holidayId = $("#recipient-holiday-id").val();
+    api.createRecipient(function(){
+          api.listRecipients(recipientListCallback, holidayId);
+    }, holidayId, name);
   });
+
+  // $(document).on('click','.recipient-li', function(e){
+  //   e.preventDefault();
+  //   var recipientId = $(this).data('id');
+  //   var recipientName = $(this).text();
+  //   $('#recipient-heading').html("Gift ideas for " + recipientName + ":");
+  //   api.listGiftIdeas(callback, recipientId);
+  // });
 
   $('#create-gift-idea').on('submit', function(e) {
     e.preventDefault();
