@@ -61,6 +61,16 @@ var api = {
     }, callback);
   },
 
+  deleteHoliday: function (callback, name) {
+    this.ajax({
+      method: 'DELETE',
+      url: this.svr + '/holidays',
+      contentType: 'application/json; charset=utf-8',
+      data: JSON.stringify({"holiday": {"name":name}}),
+      dataType: 'json'
+    }, callback);
+  },
+
   createRecipient: function (callback, holidayId, name) {
     this.ajax({
       method: 'POST',
@@ -79,9 +89,29 @@ var api = {
     }, callback);
   },
 
+  deleteRecipients: function (callback, holidayID, name) {
+    this.ajax({
+      method: 'DELETE',
+      url: this.svr + '/holidays' + holidayId + '/recipients',
+      contentType: 'application/json; charset=utf-8',
+      data: JSON.stringify({"recipient": {"name":name}}),
+      dataType: 'json'
+    }, callback);
+  },
+
   createGiftIdea: function (callback, holidayId, recipientId, description) {
     this.ajax({
       method: 'POST',
+      url: this.svr + '/holidays/' + holidayId + '/recipients/' + recipientId + '/gift_ideas',
+      contentType: 'application/json; charset=utf-8',
+      data: JSON.stringify({"gift_idea": {"description":description}}),
+      dataType: 'json'
+    }, callback);
+  },
+
+  updateGiftIdea: function (callback, holidayId, recipientId, description) {
+    this.ajax({
+      method: 'PATCH',
       url: this.svr + '/holidays/' + holidayId + '/recipients/' + recipientId + '/gift_ideas',
       contentType: 'application/json; charset=utf-8',
       data: JSON.stringify({"gift_idea": {"description":description}}),
@@ -97,6 +127,15 @@ var api = {
     }, callback);
   },
 
+  deleteGiftIdea: function (callback, holidayId, recipientId, description) {
+    this.ajax({
+      method: 'DELETE',
+      url: this.svr + '/holidays/' + holidayId + '/recipients/' + recipientId + '/gift_ideas',
+      contentType: 'application/json; charset=utf-8',
+      data: JSON.stringify({"gift_idea": {"description":description}}),
+      dataType: 'json'
+    }, callback);
+  },
 
 };
 
@@ -234,7 +273,36 @@ $(function() {
     }, holidayId, recipientId, description);
   });
 
+  $('#update-gift-idea').on('submit', function(e) {
+    e.preventDefault();
+    var description = $('#gift-description').val();
+    var holidayId = $("#recipient-holiday-id").val();
+    var recipientId = $('#gift-idea-recipient-id').val();
+    api.createGiftIdea(function(){
+      api.listGiftIdeas(giftListCallback, holidayId, recipientId);
+    }, holidayId, recipientId, description);
+  });
+
+  $('#delete-holiday').on('submit', function(e) {
+    e.preventDefault();
+    var name = $('#holiday-name').val();
+    api.deleteHoliday(function(){$("#list-holidays").trigger("submit")}, name);
+  });
+
+  $('#delete-recipient').on('submit', function(e) {
+    e.preventDefault();
+    var name = $('#recipient-name').val();
+    api.deleteRecipient(function(){$("#list-holidays").trigger("submit")}, name);
+  });
+
+  $('#delete-gift-idea').on('submit', function(e) {
+    e.preventDefault();
+    var name = $('#gift-description').val();
+    api.deleteGiftIdea(function(){$("#list-holidays").trigger("submit")}, name);
+  });
+
   $('#logout').on('submit', function(e) {
-  var credentials = wrap('credentials', form2object(this));
-});
+    var credentials = wrap('credentials', form2object(this));
+  });
+
 });
