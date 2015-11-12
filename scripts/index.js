@@ -140,6 +140,7 @@ var api = {
 };
 
 
+
 $(function() {
   var form2object = function(form) { // extracts input data from a form and adds it to an object
     var data = {};
@@ -160,9 +161,11 @@ $(function() {
 
   var holidayListCallback = function(error, data) {
     $(".holiday-listing").empty();
+    $('input:text').val('')
     var arr = data.holidays;
     arr.forEach(function(holiday, _index, _arr){
       $(".holiday-listing").append("<li><a class='holiday-li' data-id='" + holiday.id +  "' href='#'>"+ holiday.name + "</a></li>");
+
       // html data-* attribute
       // $('a').data('id') == 1
     });
@@ -170,6 +173,7 @@ $(function() {
 
   var recipientListCallback = function(error, data) {
     $(".recipient-listing").empty();
+    $('input:text').val('')
     var arr = data.recipients;
     arr.forEach(function(recipient, _index, _arr){
       $(".recipient-listing").append("<li><a class='recipient-li' data-id='" + recipient.id +  "' href='#'>"+ recipient.name + "</a></li>");
@@ -180,6 +184,7 @@ $(function() {
 
   var giftListCallback = function(error, data) {
     $(".gift-listing").empty();
+    $('input:text').val('')
     var arr = data.gift_ideas;
     arr.forEach(function(giftIdea, _index, _arr){
       $(".gift-listing").append("<li><a class='gift-idea-li' data-id='" + giftIdea.id +  "' href='#'>"+ giftIdea.description + "</a></li>");
@@ -221,6 +226,22 @@ $(function() {
     api.login(credentials, loginCallback);
   });
 
+// adding a click handler so 'view saved holidays' will only show if user is logged in
+  $("#register-button").click(function() {
+    $("#registration-form").hide();
+    $('#registration-complete').show();
+    $('#logged-in').hide()
+    // $('input:password').val('')
+  });
+
+  $("#login-button").click(function() {
+    $(".holiday-view").show();
+    $("#logout-button").show();
+    $("#registration-form").hide();
+    $("#login-form").hide();
+    $('#logged-in').hide()
+  });
+
   $('#list-holidays').on('submit', function(e) {
     e.preventDefault();
     api.listHolidays(holidayListCallback);
@@ -235,7 +256,9 @@ $(function() {
     var holidayName = $(this).text();
     $("#recipient-holiday-id").val(holidayId);
     $('#holiday-heading').html(holidayName + " recipients:");
-    $('.gift-listing').empty()
+    $('.gift-listing').empty();
+    $('#recipient-heading').empty();
+    $(".recipient-view").show();
     // I need to clear gift idea header and gift idea text entry box content when clicking on a new holiday
     api.listRecipients(recipientListCallback, holidayId);
   });
@@ -246,6 +269,7 @@ $(function() {
     var recipientName = $(this).text();
     var holidayId = $("#recipient-holiday-id").val();
     $("#gift-idea-recipient-id").val(recipientId);
+    $(".gift-view").show();
     $('#recipient-heading').html("Gift ideas for " + recipientName + ":");
     api.listGiftIdeas(giftListCallback, holidayId, recipientId);
   });

@@ -12,52 +12,58 @@
     <body>
       <div id="background"></div>
       <h1>Gift Planner</h1>
-      <h2 id='logged-in'>Please Log In To Start Planning</h2>
-      <!--<h2 class="alert">Please Create an Account To Start Planning</h2>-->
+      <h2 id='logged-in'>Please Register or Log In to start planning</h2>
+      <h2 id='registration-complete'>Thank you for registering, please log in to start planning</h2>
       <div class="inputs">
-        <form id="register">
-          <input name="email" type="text" placeholder="email">
-          <input name="password" type="password" placeholder="password">
-          <input name="password_confirmation" type="password" placeholder="password confirmation">
-          <input name="register" type="submit" value="Register">
-        </form>
-        <form id="login">
-          <input name="email" type="text" value="bbb@ccc.com">
-          <input name="password" type="password" value="12345">
-          <input name="login" type="submit" value="Login">
-        </form>
-        <form id="logout">
-          <input name="logout" type="submit" value="Log Out">
-        </form>
-        <br>
+        <div id="registration-form">
+          <form id="register">
+            <input name="email" type="text" placeholder="email">
+            <input name="password" type="password" placeholder="password">
+            <input id="register-button" name="register" type="submit" value="Register">
+          </form>
+        </div>
 
-        <form id="list-holidays">
-          <input name="list-holidays" type="submit" value="View Saved Holidays">
-        </form>
-        <ul class="holiday-listing">
-          <!--<li><a href="https://www.google.com">Christmas</a></li>
-          <li><a href="https://www.google.com">Gabe's Birthday</a></li>
-          <li><a href="https://www.google.com">Valentine's Day</a></li>-->
-          </ul>
+        <div id="login-form">
+          <form id="login">
+            <input name="email" type="text" value="bbb@ccc.com">
+            <input name="password" type="password" value="12345">
+            <input id="login-button" name="login" type="submit" value="Login">
+          </form>
+          <form id="logout">
+            <input id="logout-button" name="logout" type="submit" value="Log Out">
+          </form>
+        </div>
 
-        <form id="create-holiday">
-          <input id="holiday-name" name="name" type="text" placeholder="New holiday name">
-          <input name="create-holiday" type="submit" value="Create a new Holiday">
-        </form>
+        <div class="holiday-view">
+          <form id="list-holidays">
+            <input name="list-holidays" type="submit" value="View Saved Holidays">
+          </form>
+          <ul class="holiday-listing">
+            <!--<li><a href="https://www.google.com">Christmas</a></li>
+            <li><a href="https://www.google.com">Gabe's Birthday</a></li>
+            <li><a href="https://www.google.com">Valentine's Day</a></li>-->
+            </ul>
+          <form id="create-holiday">
+            <input id="holiday-name" name="name" type="text" placeholder="New holiday name">
+            <input name="create-holiday" type="submit" value="Create a new Holiday">
+          </form>
+        </div>
 
+        <div class="recipient-view">
         <h3 id="holiday-heading"></h3>
         <ul class="recipient-listing">
           <!--<li><a href="https://www.google.com">Hao</a></li>
           <li><a href="https://www.google.com">Gabe</a></li>
           <li><a href="https://www.google.com">Zoe</a></li>-->
           </ul>
-
         <form id="create-recipient">
           <input type="hidden" id="recipient-holiday-id" name="holiday_id">
           <input id="recipient-name" name="name" type="text" placeholder="New recipient name">
           <input name="create-recipient" type="submit" value="Add a new Recipient">
         </form>
+        </div>
 
+        <div class="gift-view">
         <h3 id="recipient-heading"></h3>
         <ul class="gift-listing">
           <!--<li><a href="https://www.google.com">Legos</a></li>
@@ -70,10 +76,10 @@
           <input id="gift-description" description="description" type="text" placeholder="New gift idea">
           <input name="create-gift-idea" type="submit" value="Add a new gift idea">
         </form>
-
-        <br>
+        </div>
+        <!-- <br>
         <label for="result">Result</label>
-        <textarea id="result"></textarea>
+        <textarea id="result"></textarea>-->
       </div>
 
         <!--<p><a target="_blank" href="http://porter-waterlines-15870.bitballoon.com/">Learn more about the creator of this tool</a></p>-->

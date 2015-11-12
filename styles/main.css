@@ -23,3 +23,27 @@ body {
 #holiday-name {
   width: 200px;
 }
+
+#register-button {
+  display: inline;
+}
+
+#registration-complete {
+  display: none;
+}
+
+#logout-button {
+  display: none;
+}
+
+.holiday-view {
+  display: none;
+}
+
+.recipient-view {
+  display: none;
+}
+
+.gift-view {
+  display: none;
+}
