@@ -235,6 +235,8 @@ $(function() {
     var holidayName = $(this).text();
     $("#recipient-holiday-id").val(holidayId);
     $('#holiday-heading').html(holidayName + " recipients:");
+    $('.gift-listing').empty()
+    // I need to clear gift idea header and gift idea text entry box content when clicking on a new holiday
     api.listRecipients(recipientListCallback, holidayId);
   });
 
