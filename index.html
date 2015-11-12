@@ -30,6 +30,7 @@
           <input name="logout" type="submit" value="Log Out">
         </form>
         <br>
+
         <form id="list-holidays">
           <input name="list-holidays" type="submit" value="View Saved Holidays">
         </form>
@@ -38,29 +39,35 @@
           <li><a href="https://www.google.com">Gabe's Birthday</a></li>
           <li><a href="https://www.google.com">Valentine's Day</a></li>-->
           </ul>
+
         <form id="create-holiday">
           <input id="holiday-name" name="name" type="text" placeholder="New holiday name">
           <input name="create-holiday" type="submit" value="Create a new Holiday">
         </form>
+
         <h3 id="holiday-heading"></h3>
         <ul class="recipient-listing">
           <!--<li><a href="https://www.google.com">Hao</a></li>
           <li><a href="https://www.google.com">Gabe</a></li>
           <li><a href="https://www.google.com">Zoe</a></li>-->
           </ul>
+
         <form id="create-recipient">
           <input type="hidden" id="recipient-holiday-id" name="holiday_id">
           <input id="recipient-name" name="name" type="text" placeholder="New recipient name">
           <input name="create-recipient" type="submit" value="Add a new Recipient">
         </form>
-        <h3 id="gift-heading"></h3>
+
+        <h3 id="recipient-heading"></h3>
         <ul class="gift-listing">
           <!--<li><a href="https://www.google.com">Legos</a></li>
           <li><a href="https://www.google.com">Play-doh</a></li>
           <li><a href="https://www.google.com">Trucks</a></li>-->
           </ul>
+
         <form id="create-gift-idea">
-          <input id="gift-name" name="name" type="text" placeholder="New gift idea name">
+          <input type="hidden" id="gift-idea-recipient-id" name="recipient_id">
+          <input id="gift-description" description="description" type="text" placeholder="New gift idea">
           <input name="create-gift-idea" type="submit" value="Add a new gift idea">
         </form>
 

@@ -79,20 +79,20 @@ var api = {
     }, callback);
   },
 
-  createGiftIdea: function (callback) {
+  createGiftIdea: function (callback, holidayId, recipientId, description) {
     this.ajax({
       method: 'POST',
-      url: this.svr + '/holidays/recipients',
+      url: this.svr + '/holidays/' + holidayId + '/recipients/' + recipientId + '/gift_ideas',
       contentType: 'application/json; charset=utf-8',
-      data: JSON.stringify({}),
+      data: JSON.stringify({"gift_idea": {"description":description}}),
       dataType: 'json'
     }, callback);
   },
 
-  listGiftIdeas: function (callback) {
+  listGiftIdeas: function (callback, holidayId, recipientId) {
     this.ajax({
       method: 'GET',
-      url: this.svr + '/holidays/recipients',
+      url: this.svr + '/holidays/' + holidayId + '/recipients/' + recipientId + '/gift_ideas',
       dataType: 'json'
     }, callback);
   },
@@ -139,6 +139,15 @@ $(function() {
     });
   };
 
+  var giftListCallback = function(error, data) {
+    $(".gift-listing").empty();
+    var arr = data.gift_ideas;
+    arr.forEach(function(giftIdea, _index, _arr){
+      $(".gift-listing").append("<li><a class='gift-idea-li' data-id='" + giftIdea.id +  "' href='#'>"+ giftIdea.description + "</a></li>");
+      // html data-* attribute
+      // $('a').data('id') == 1
+    });
+  };
 
   var callback = function callback(error, data) { // show me error or show me response - gets returns from the request
     if (error) {
@@ -190,6 +199,16 @@ $(function() {
     api.listRecipients(recipientListCallback, holidayId);
   });
 
+  $(document).on('click','.recipient-li', function(e){
+    e.preventDefault();
+    var recipientId = $(this).data('id');
+    var recipientName = $(this).text();
+    var holidayId = $("#recipient-holiday-id").val();
+    $("#gift-idea-recipient-id").val(recipientId);
+    $('#recipient-heading').html("Gift ideas for " + recipientName + ":");
+    api.listGiftIdeas(giftListCallback, holidayId, recipientId);
+  });
+
   $('#create-holiday').on('submit', function(e) {
     e.preventDefault();
     var name = $('#holiday-name').val();
@@ -201,22 +220,18 @@ $(function() {
     var name = $('#recipient-name').val();
     var holidayId = $("#recipient-holiday-id").val();
     api.createRecipient(function(){
-          api.listRecipients(recipientListCallback, holidayId);
+      api.listRecipients(recipientListCallback, holidayId);
     }, holidayId, name);
   });
 
-  // $(document).on('click','.recipient-li', function(e){
-  //   e.preventDefault();
-  //   var recipientId = $(this).data('id');
-  //   var recipientName = $(this).text();
-  //   $('#recipient-heading').html("Gift ideas for " + recipientName + ":");
-  //   api.listGiftIdeas(callback, recipientId);
-  // });
-
   $('#create-gift-idea').on('submit', function(e) {
     e.preventDefault();
-    var name = $('#gift-name').val();
-    api.createGiftIdea(callback, description);
+    var description = $('#gift-description').val();
+    var holidayId = $("#recipient-holiday-id").val();
+    var recipientId = $('#gift-idea-recipient-id').val();
+    api.createGiftIdea(function(){
+      api.listGiftIdeas(giftListCallback, holidayId, recipientId);
+    }, holidayId, recipientId, description);
   });
 
   $('#logout').on('submit', function(e) {
