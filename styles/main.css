@@ -12,20 +12,45 @@ body {
   background-image: url(./images/boxes_grayscale.jpg);
   background-repeat: repeat-y;
   background-size: 100%;
-  opacity: 0.2;
+  opacity: 0.3;
   z-index: -1;
 }
 
-#inputs {
+h1 {
+  color: #2eb82e;
+  font-size: 60px;
+  margin-top: -5px;
+  margin-bottom: -25px;
+  text-shadow: 2px 2px gray;
+}
 
+h2 {
+  font-size: 20px;
+}
+
+.subhead {
+  font-size: 30px;
+  margin-top: -5px;
+}
+
+.text-box {
+  width: 200px;
 }
 
 #holiday-name {
   width: 200px;
 }
 
+#recipient-name {
+  width: 200px;
+}
+
 #register-button {
   display: inline;
+}
+
+#gift-description {
+  width: 500px;
 }
 
 #registration-complete {

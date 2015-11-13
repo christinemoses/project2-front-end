@@ -244,6 +244,10 @@ $(function() {
     api.listHolidays(holidayListCallback);
   });
 
+  $("#create-holiday").click(function() {
+    $('#add-recipients').show();
+  });
+
   // this is event delegation method for event handling
   // tells the page to keep listening for this event
   // even if the element is created later on
