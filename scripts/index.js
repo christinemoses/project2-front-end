@@ -1,6 +1,6 @@
 'use strict';
 var api = {
-  svr: 'http://localhost:3000',
+  svr: 'https://sleepy-hollows-7012.herokuapp.com/',
   token: null,
 
   ajax: function(config, cb) {
@@ -24,19 +24,19 @@ var api = {
   register: function register(credentials, callback) {
     this.ajax({
       method: 'POST',
-      url: this.svr + '/register', //look at the curl method for the path
+      url: this.svr + '/register',
       contentType: 'application/json; charset=utf-8',
-      data: JSON.stringify(credentials),  // takes a JS object and converts it to valid JSON
-      dataType: 'json' // expecting to get json content back
+      data: JSON.stringify(credentials),
+      dataType: 'json'
     }, callback);
   },
 
   login: function login(credentials, callback) {
     this.ajax({
       method: 'POST',
-      url: this.svr + '/login', //look at the curl method for the path
+      url: this.svr + '/login',
       contentType: 'application/json; charset=utf-8',
-      data: JSON.stringify(credentials),  // takes a JS object and converts it to valid JSON
+      data: JSON.stringify(credentials),
       dataType: 'json'
     }, callback);
   },
@@ -161,7 +161,7 @@ $(function() {
 
   var holidayListCallback = function(error, data) {
     $(".holiday-listing").empty();
-    $('input:text').val('')
+    $('input:text').val('');
     var arr = data.holidays;
     arr.forEach(function(holiday, _index, _arr){
       $(".holiday-listing").append("<li><a class='holiday-li' data-id='" + holiday.id +  "' href='#'>"+ holiday.name + "</a></li>");
@@ -173,39 +173,35 @@ $(function() {
 
   var recipientListCallback = function(error, data) {
     $(".recipient-listing").empty();
-    $('input:text').val('')
+    $('input:text').val('');
     var arr = data.recipients;
     arr.forEach(function(recipient, _index, _arr){
       $(".recipient-listing").append("<li><a class='recipient-li' data-id='" + recipient.id +  "' href='#'>"+ recipient.name + "</a></li>");
-      // html data-* attribute
-      // $('a').data('id') == 1
     });
   };
 
   var giftListCallback = function(error, data) {
     $(".gift-listing").empty();
-    $('input:text').val('')
+    $('input:text').val('');
     var arr = data.gift_ideas;
     arr.forEach(function(giftIdea, _index, _arr){
-      $(".gift-listing").append("<li><a class='gift-idea-li' data-id='" + giftIdea.id +  "' href='#'>"+ giftIdea.description + "</a></li>");
-      // html data-* attribute
-      // $('a').data('id') == 1
+      $(".gift-listing").append("<li class='gift-idea-li' data-id='" + giftIdea.id +  "' href='#'>"+ giftIdea.description + "</li>");
     });
   };
 
-  var callback = function callback(error, data) { // show me error or show me response - gets returns from the request
+  var callback = function callback(error, data) {
     if (error) {
       console.error(error);
       $('#result').val('status: ' + error.status + ', error: ' +error.error);
       return;
     }
-    $('#result').val(JSON.stringify(data, null, 4)); // formatting it so it prints pretty
+    $('#result').val(JSON.stringify(data, null, 4)); // formatting it to a more readable view
   };
 
-  $('#register').on('submit', function(e) { // should be similar to code used for clicks working
-    var credentials = wrap('credentials', form2object(this)); // take form data
+  $('#register').on('submit', function(e) {
+    var credentials = wrap('credentials', form2object(this));
     api.register(credentials, callback);
-    e.preventDefault(); // will always use prefentDefault with a submit function - to keep the browser from automatically sending the submit to the server - we want to do something else with it
+    e.preventDefault(); // prevents page from reloading
   });
 
   var loginCallback = function(error, loginData){
@@ -226,20 +222,21 @@ $(function() {
     api.login(credentials, loginCallback);
   });
 
-// adding a click handler so 'view saved holidays' will only show if user is logged in
   $("#register-button").click(function() {
     $("#registration-form").hide();
     $('#registration-complete').show();
-    $('#logged-in').hide()
+    $('#logged-in').hide();
     // $('input:password').val('')
   });
 
   $("#login-button").click(function() {
     $(".holiday-view").show();
-    $("#logout-button").show();
+    // $("#logout-button").show();
     $("#registration-form").hide();
     $("#login-form").hide();
-    $('#logged-in').hide()
+    $('#logged-in').hide();
+    $('#registration-complete').hide();
+    $('#login-complete').show();
   });
 
   $('#list-holidays').on('submit', function(e) {
@@ -257,9 +254,10 @@ $(function() {
     $("#recipient-holiday-id").val(holidayId);
     $('#holiday-heading').html(holidayName + " recipients:");
     $('.gift-listing').empty();
+    $('#add-recipients').show();
+    $('#login-complete').hide();
     $('#recipient-heading').empty();
     $(".recipient-view").show();
-    // I need to clear gift idea header and gift idea text entry box content when clicking on a new holiday
     api.listRecipients(recipientListCallback, holidayId);
   });
 
@@ -270,6 +268,7 @@ $(function() {
     var holidayId = $("#recipient-holiday-id").val();
     $("#gift-idea-recipient-id").val(recipientId);
     $(".gift-view").show();
+    $('#add-recipients').hide();
     $('#recipient-heading').html("Gift ideas for " + recipientName + ":");
     api.listGiftIdeas(giftListCallback, holidayId, recipientId);
   });
@@ -277,6 +276,7 @@ $(function() {
   $('#create-holiday').on('submit', function(e) {
     e.preventDefault();
     var name = $('#holiday-name').val();
+    $('#add-gift-ideas').show();
     api.createHoliday(function(){$("#list-holidays").trigger("submit")}, name);
   });
 

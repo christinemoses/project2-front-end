@@ -47,3 +47,19 @@ body {
 .gift-view {
   display: none;
 }
+
+#login-complete {
+  display: none;
+}
+
+#add-recipients {
+  display: none;
+}
+
+#add-gift-ideas {
+  display: none;
+}
+
+p {
+  font-size: 12px;
+}
