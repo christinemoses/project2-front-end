@@ -1,4 +1,4 @@
-##Front end content for WDI project 2
+#Front end content for WDI project 2
 
 #Link to Project 2 API Repo:
 https://github.com/christinemoses/project2-api
@@ -10,6 +10,7 @@ https://github.com/christinemoses/project2-api
 I created two wireframes when planning the app.  They helped me to clarify what I wanted the user interaction to be, but I didn't end up having enough time to make the app usable and also fit the visual layout I envisioned.
 *Two wireframe images are saved to the project2-front-end/styles/images directory.
 
+#Planning:
 This project is a Gift Planning app that allows logged in users to create holidays or events for which they plan to purchase gifts.  For each holiday, they can add recipients who will receive gifts.  For each recipient, users can add gift ideas.
 
 When creating the user stories, I listed all features I would ideally like to have in this type of app, then pared it down to the simplest use case.  I focused solely on completing the minimum functionality to meet that use case, then prioritized the remaining items according to how much they would add to the usability of the app and level of difficulty to achieve.
@@ -20,9 +21,9 @@ I was not able to complete any of the stretch goals in the time allotted, but wa
   * Adding more text to clarify usability
   * Using a bootstrap template to make it more attractive and responsive 
 
-##User Stories:
+#User Stories:
 
-#Cards -
+##Cards
      **roles:
 
 - Holiday gift buyer
