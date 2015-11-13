@@ -4,7 +4,7 @@
 https://github.com/christinemoses/project2-api
 
 #Link to the live app:
-
+http://christinemoses.github.io/project2-front-end/
 
 #Wireframes:
 I created two wireframes when planning the app.  They helped me to clarify what I wanted the user interaction to be, but I didn't end up having enough time to make the app usable and also fit the visual layout I envisioned.
