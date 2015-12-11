@@ -200,9 +200,30 @@ $(function() {
 
   $('#register').on('submit', function(e) {
     var credentials = wrap('credentials', form2object(this));
-    api.register(credentials, callback);
+    api.register(credentials, function(err, data) {
+      handleError(err, data function() {
+        alert("Invalid Credentials");
+      });
+    });
     e.preventDefault(); // prevents page from reloading
   });
+
+      //Register from Bucketlisters
+
+    // $('#reg-form').on('submit', function(e) {
+    //     var credentials = form2object(this);
+    //     console.log(credentials);
+    //     bucketList_api.signup(credentials, function(err, data) {
+    //         handleError(err, data, function() {
+    //             alert("Invalid credentials");
+    //          });
+    //         $('#reg-popup').modal('hide');
+    //         $('.modal-backdrop').remove();
+    //         $('#login-popup').modal('show');
+    //        });
+    //     e.preventDefault();
+    //     });
+
 
   var loginCallback = function(error, loginData){
     console.log('loginData is ', loginData);
@@ -312,6 +333,25 @@ $(function() {
       api.listGiftIdeas(giftListCallback, holidayId, recipientId);
     }, holidayId, recipientId, description);
   });
+
+
+      // UpdateListItem from Bucketlister
+    //  $('#update-activity').on('submit', function(e) {
+    //     e.preventDefault();
+    //     var credentials = form2object(this);
+    //     $('input:text').val('');
+    //     console.log(credentials);
+    //     console.log(id);
+    //     bucketList_api.updateListItem(id, credentials, function(err, data){
+    //       handleError(err,data);
+    //       console.log('inside update AJAX');
+    //       $('#activity-table tr:last').after(
+    //         '<tr data-id=' + data._id + '><td>' + data.name +  '</td><td>' + data.city + '</td><td><button class="edit btn btn-primary" data-toggle="modal" data-target="#update-activity-popup">Edit</button></td><td><button class="delete btn btn-danger">Delete</button></td></tr>');
+    //     });
+    //     $('#update-activity-popup').modal('hide');
+    //     $('.modal-backdrop').remove();
+    // });
+
 
   $('#delete-holiday').on('submit', function(e) {
     e.preventDefault();

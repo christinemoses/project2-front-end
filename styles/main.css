@@ -3,7 +3,180 @@ body {
   font-family: 'Khula', sans-serif;
 }
 
-#background {
+#logo {
+  display: inline-block;
+  font-size: 30px;
+  color: #F4EAD5;
+  margin-top: 10px;
+}
+
+.nav-background {
+  background-color: #524656;
+  border-color: #524656;
+  border-radius: 0px;
+}
+
+#logout-button-text {
+  display: inline-block;
+  font-size: 20px;
+  color: #F4EAD5;
+  margin-top: 10px;
+  background-color: #524656;
+}
+
+.jumbotron {
+  height: 700px;
+  background-image: url(./images/red-present-1440x1000-w.png);
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  margin-top: 20px;
+  background-color: #F4EAD5;
+}
+
+#landing-page-headline {
+  margin-left: 50px;
+  text-align: left;
+  font-size: 64px;
+  color: #1E8C93;
+}
+
+h1 {
+  margin-top: -10px;
+  margin-bottom: -10px;
+}
+
+#landing-page-subhead {
+  font-size: 28px;
+  color: #1E8C93;
+}
+
+@media only screen and (max-width: 1000px) {
+   .jumbotron {
+      background-image: url(./images/red-present-1000x1000.png);
+      height: 600px;
+    }
+    #landing-page-headline {
+      font-size: 42px;
+    }
+    #landing-page-subhead {
+      font-size: 22px;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+   .jumbotron {
+      background-image: url(./images/red-present-700x700.png);
+      height: 500px;
+    }
+    #landing-page-headline {
+      font-size: 28px;
+    }
+    #landing-page-subhead {
+      font-size: 18px;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+   .jumbotron {
+      background-image: url(./images/red-present-500x550.png);
+      height: 400px;
+    }
+    #landing-page-headline {
+      font-size: 24px;
+    }
+    #landing-page-subhead {
+      font-size: 16px;
+    }
+}
+
+
+
+/*
+@media only screen and (max-width: 1000px) {
+   .jumbotron {
+      background-image: url(./images/climber3-1000.jpg);
+      height: 600px;
+    }
+    #landing-page-headline {
+      font-size: 42px;
+    }
+    #landing-page-subhead {
+      font-size: 22px;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+   .jumbotron {
+      background-image: url(./images/climber3-700.jpg);
+      height: 500px;
+    }
+    #landing-page-headline {
+      font-size: 28px;
+    }
+    #landing-page-subhead {
+      font-size: 18px;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+   .jumbotron {
+      background-image: url(./images/climber3-500.jpg);
+      height: 400px;
+    }
+    #landing-page-headline {
+      font-size: 24px;
+    }
+    #landing-page-subhead {
+      font-size: 16px;
+    }
+}
+*/
+
+#landing-page-buttons {
+  margin: 0 auto;
+  text-align: left;
+  margin-left: 50px;
+}
+
+#landing-page-login-button {
+  background-color: #F4EAD5;
+  color: #1E8C93;
+  border-color: #1E8C93;
+  border-width: 2px;
+  font-weight: 600;
+  width: 100px;
+}
+
+#landing-page-reg-button {
+  background-color: #F4EAD5;
+  color: #1E8C93;
+  border-color: #1E8C93;
+  border-width: 2px;
+  font-weight: 600;
+  width: 100px;
+}
+
+#registration-form {
+  display: none;
+}
+
+#login-form {
+  display: none;
+}
+
+.landing-page-col-text {
+  text-align: center;
+  font-size: 24px;
+  color: #585858;
+}
+
+.form-control {
+  width: 300px;
+}
+
+/* OLD CSS */
+
+/*#background {
   position: fixed;
   top: 0;
   left: 0;
@@ -15,23 +188,7 @@ body {
   opacity: 0.3;
   z-index: -1;
 }
-
-h1 {
-  color: #2eb82e;
-  font-size: 60px;
-  margin-top: -5px;
-  margin-bottom: -25px;
-  text-shadow: 2px 2px gray;
-}
-
-h2 {
-  font-size: 20px;
-}
-
-.subhead {
-  font-size: 30px;
-  margin-top: -5px;
-}
+*/
 
 .text-box {
   width: 200px;
